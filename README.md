@@ -75,40 +75,40 @@
 5. Retrieve articles with the information about the author attached to each row (there should be 12 rows in the result and around 10 columns, including the article’s title, text, rating, and date as well as the author’s name and sex):
 
     ```postgresql
-    ... here goes your SQL ...
+   SELECT * FROM articles INNER JOIN authors ON articles.author_id = authors.id;
     ```
 
 6. To get the twelve rows, you must have used one of the constructions `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, or `FULL JOIN`. How many rows would the other three have returned? First try to think of the answers and then verify them by running the queries (it’s important you understand the results). Put the numbers below:
 
     ```
-    INNER JOIN: ? rows
-    LEFT JOIN: ? rows
-    RIGHT JOIN: ? rows
-    FULL JOIN: ? rows
+    INNER JOIN: ? 12
+    LEFT JOIN: ? 13
+    RIGHT JOIN: ? 14
+    FULL JOIN: ? 15
     ```
 
 7. Imagine you’re using pagination to display articles showing five articles per page. Retrieve the content for the first page: create a query that would return the latest five articles, ordered from the latest to the earliest.
 
     ```postgresql
-    ... here goes your SQL ...
+    SELECT * FROM  articles  LIMIT 5 OFFSET 7;
     ```
 
 8. Retrieve the content for the second page: articles 6 through 10 (still assuming chronological order).
 
     ```postgresql
-    ... here goes your SQL ...
+   SELECT * FROM  articles LIMIT 5 OFFSET 5;
     ```
     
 9. Retrieve the content for the third page: articles 11 through 15 (never mind there are actually only 12 of them currently in the table).
 
     ```postgresql
-    ... here goes your SQL ...
+    SELECT * FROM  articles LIMIT 5 OFFSET 10;
     ```
     
 10. Count the number of five-article pages required to accommodate all articles:
 
     ```postgresql
-    ... here goes your SQL ...
+    SELECT ceil(count(*)/5::double precision)  FROM  articles;
     ```
     
 11. Calculate an average rating of the articles, rounded to the nearest integer:

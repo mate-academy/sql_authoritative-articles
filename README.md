@@ -114,19 +114,19 @@
 11. Calculate an average rating of the articles, rounded to the nearest integer:
 
     ```postgresql
-    ... here goes your SQL ...
+    SELECT round(AVG(rating)) FROM  articles;
     ```
 
 12. Count males and females among the authors. There should be two rows (for males and females) and two columns: `sex` (`F` or `M`) and `cnt` (count).
 
     ```postgresql
-    ... here goes your SQL ...
+    SELECT count('F') AS "cnt","Sex" FROM  authors GROUP BY "Sex";
     ```
 
 13. Find the date of the earliest (put in the column `earliest`) and latest (put in the column `latest`) article written by each author:
 
     ```postgresql
-    ... here goes your SQL ...
+    SELECT  authors."First name", authors."Last name", articles.date AS "earliest",  articles.date  AS "latest" FROM  authors INNER JOIN articles ON articles.author_id = authors.id;
     ```
     
 14. Calculate the total length of the text written by each author (count both `text` and `title`; you can keep the tags in `text` while counting):

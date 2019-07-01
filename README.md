@@ -126,17 +126,19 @@
 13. Find the date of the earliest (put in the column `earliest`) and latest (put in the column `latest`) article written by each author:
 
     ```postgresql
-    SELECT DISTINCT ON (authors."First name" ||' '|| authors."Last name") authors."First name" ||' '|| authors."Last name",
-    (SELECT min(articles.date) FROM articles WHERE articles.author_id = authors.id)  AS "earliest",
-    (SELECT max(articles.date) FROM articles WHERE articles.author_id = authors.id)  AS "latest"
+    SELECT authors."First name" ||' '|| authors."Last name",
+    min(articles.date) AS "earliest",
+    max(articles.date) AS "latest"
     FROM authors INNER JOIN articles ON articles.author_id = authors.id
-    ORDER BY authors."First name" ||' '|| authors."Last name";
+    GROUP BY authors."First name" ||' '|| authors."Last name";
     ```
     
 14. Calculate the total length of the text written by each author (count both `text` and `title`; you can keep the tags in `text` while counting):
 
     ```postgresql
-    ... here goes your SQL ...
+    SELECT authors."First name" ||' '|| authors."Last name", sum(length(title) + length(text))
+    FROM articles LEFT JOIN authors ON articles.author_id = authors.id
+    GROUP BY author_id, authors."First name", authors."Last name";
     ```
     
 15. Output all the authors in a random order. There should be only one column aliased `author` with the first and last name of the author concatenated (using a space, of course). The order of the rows should be different on each request:

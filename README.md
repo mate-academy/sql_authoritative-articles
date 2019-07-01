@@ -73,7 +73,7 @@
 
 5. Retrieve articles with the information about the author attached to each row (there should be 12 rows in the result and around 10 columns, including the article’s title, text, rating, and date as well as the author’s name and sex):
 
-   SELECT * FROM articles LEFT JOIN authors ON articles.author_id = authors.id;
+   SELECT * FROM articles LEFT JOIN authors ON articles.id = authors.id;
 
 6. To get the twelve rows, you must have used one of the constructions `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, or `FULL JOIN`. How many rows would the other three have returned? First try to think of the answers and then verify them by running the queries (it’s important you understand the results). Put the numbers below:
 
@@ -95,21 +95,32 @@
 9. Retrieve the content for the third page: articles 11 through 15 (never mind there are actually only 12 of them currently in the table).
 
   SELECT * FROM articles ORDER BY date DESC OFFSET 10 LIMIT 5;
-    
+
+      
 10. Count the number of five-article pages required to accommodate all articles:
 
-    SELECT ceil(count('title') / 5.0) AS five_article_pages FROM articles;
+    SELECT CEIL(count('title') / 5.0) AS five_article_pages FROM articles;
+
+    SELECT CEIL(COUNT(id::DOUBLE PRECISION)/5) AS pages FROM articles;
     
 11. Calculate an average rating of the articles, rounded to the nearest integer:
 
-   SELECT AVG(ROUND(rating)) FROM articles
+   SELECT AVG(ROUND(rating)) FROM articles;
 
 12. Count males and females among the authors. There should be two rows (for males and females) and two columns: `sex` (`F` or `M`) and `cnt` (count).
 
-    SELECT sex, COUNT(*) FROM authors GROUP BY sex;
-
+    SELECT sex, COUNT(*) AS cnt FROM authors GROUP BY sex;
+ 
 13. Find the date of the earliest (put in the column `earliest`) and latest (put in the column `latest`) article written by each author:
+
   SELECT MIN(date) AS earliest, MAX(date) AS latest  FROM articles GROUP BY author;
+
+  SELECT (authors.first_name || ' ' || authors.last_name)  AS author, MAX(articles.date) as latest, MIN(articles.date) AS earliest
+  FROM authors
+  INNER JOIN articles
+  ON authors.id = articles.author
+  GROUP BY authors.first_name, authors.last_name;
+
     
 14. Calculate the total length of the text written by each author (count both `text` and `title`; you can keep the tags in `text` while counting):
 
@@ -117,11 +128,11 @@
      
 15. Output all the authors in a random order. There should be only one column aliased `author` with the first and last name of the author concatenated (using a space, of course). The order of the rows should be different on each request:
 
-   SELECT CONCAT(first_name , last_name) AS author FROM authors ORDER BY RANDOM();
+   SELECT CONCAT(first_name, ' ', last_name) AS author FROM authors ORDER BY RANDOM();
 
 16. "Anonymize" the authors: replace each author’s last name with the properly capitalized reverse of it. E.g., `Alofsin` should become `Nisfola`, `Esposito` should become `Otisopse`, etc.
 
-    SELECT INITCAP(LOWER(REVERSE(last_name))) FROM authors;
+    UPDATE authors SET last_name = INITCAP(REVERSE(last_name));
     
 17. Delete all articles that don’t have an author:
 

@@ -64,82 +64,106 @@
 5. Retrieve articles with the information about the author attached to each row (there should be 12 rows in the result and around 10 columns, including the article’s title, text, rating, and date as well as the author’s name and sex):
 
     ```postgresql
-    ... here goes your SQL ...
+    select * from articles
+    left join  authors on articles.author_id = authors.id;
     ```
 
 6. To get the twelve rows, you must have used one of the constructions `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, or `FULL JOIN`. How many rows would the other three have returned? First try to think of the answers and then verify them by running the queries (it’s important you understand the results). Put the numbers below:
 
     ```
-    INNER JOIN: ? rows
-    LEFT JOIN: ? rows
-    RIGHT JOIN: ? rows
-    FULL JOIN: ? rows
+    INNER JOIN: 11 rows
+    LEFT JOIN: 12 rows
+    RIGHT JOIN: 13 rows
+    FULL JOIN: 14 rows
     ```
 
 7. Imagine you’re using pagination to display articles showing five articles per page. Retrieve the content for the first page: create a query that would return the latest five articles, ordered from the latest to the earliest.
 
     ```postgresql
-    ... here goes your SQL ...
+    select * from articles
+    order by date
+    limit 5;
     ```
 
 8. Retrieve the content for the second page: articles 6 through 10 (still assuming chronological order).
 
     ```postgresql
-    ... here goes your SQL ...
+    select *
+    from articles
+    order by date
+    offset 5
+    limit 5;
     ```
     
 9. Retrieve the content for the third page: articles 11 through 15 (never mind there are actually only 12 of them currently in the table).
 
     ```postgresql
-    ... here goes your SQL ...
+    select *
+    from articles
+    order by date
+    offset 5
+    limit 5;
     ```
     
 10. Count the number of five-article pages required to accommodate all articles:
 
     ```postgresql
-    ... here goes your SQL ...
+    select ceil(count(*)/5::numeric)
+    from articles;
     ```
     
 11. Calculate an average rating of the articles, rounded to the nearest integer:
 
     ```postgresql
-    ... here goes your SQL ...
+    select round(avg(rating))
+    from articles;
     ```
 
 12. Count males and females among the authors. There should be two rows (for males and females) and two columns: `sex` (`F` or `M`) and `cnt` (count).
 
     ```postgresql
-    ... here goes your SQL ...
+    select sex, count(authors.sex) as cnt
+    from authors
+    group by sex;
     ```
 
 13. Find the date of the earliest (put in the column `earliest`) and latest (put in the column `latest`) article written by each author:
 
     ```postgresql
-    ... here goes your SQL ...
+    select author, max(date) as latest, min(date) as earliest
+    from articles
+    where author is not null
+    group by author;
     ```
     
 14. Calculate the total length of the text written by each author (count both `text` and `title`; you can keep the tags in `text` while counting):
 
     ```postgresql
-    ... here goes your SQL ...
+    select author, sum(length(title) + length(text)) as total
+    from articles
+    group by author
     ```
     
 15. Output all the authors in a random order. There should be only one column aliased `author` with the first and last name of the author concatenated (using a space, of course). The order of the rows should be different on each request:
 
     ```postgresql
-    ... here goes your SQL ...
+    select  concat_ws(' ', first_name, last_name)
+    from authors
+    order by random();
     ```
 
 16. "Anonymize" the authors: replace each author’s last name with the properly capitalized reverse of it. E.g., `Alofsin` should become `Nisfola`, `Esposito` should become `Otisopse`, etc.
 
     ```postgresql
-    ... here goes your SQL ...
+    UPDATE authors
+    SET last_name = reverse(last_name);
     ```
     
 17. Delete all articles that don’t have an author:
 
     ```postgresql
-    ... here goes your SQL ...
+    delete from articles
+    where author is null;
     ```
 
 18. **(optional)** Delete all authors that haven’t written any articles:

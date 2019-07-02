@@ -144,19 +144,21 @@
 15. Output all the authors in a random order. There should be only one column aliased `author` with the first and last name of the author concatenated (using a space, of course). The order of the rows should be different on each request:
 
     ```postgresql
-    ... here goes your SQL ...
+    SELECT "First name" ||' '|| "Last name" AS "author"
+    FROM authors ORDER BY RANDOM()
+    LIMIT 9;
     ```
 
 16. "Anonymize" the authors: replace each author’s last name with the properly capitalized reverse of it. E.g., `Alofsin` should become `Nisfola`, `Esposito` should become `Otisopse`, etc.
 
     ```postgresql
-    ... here goes your SQL ...
+    UPDATE authors SET  "Last name" = reverse("Last name");
     ```
     
 17. Delete all articles that don’t have an author:
 
     ```postgresql
-    ... here goes your SQL ...
+    DELETE FROM articles WHERE author_id IS null;
     ```
 
 18. **(optional)** Delete all authors that haven’t written any articles:

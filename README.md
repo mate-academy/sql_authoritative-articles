@@ -116,7 +116,7 @@
 12. Count males and females among the authors. There should be two rows (for males and females) and two columns: `sex` (`F` or `M`) and `cnt` (count).
 
     ```postgresql
-    SELECT sex AS sex, COUNT(*) AS cnt FROM authors GROUP BY sex
+    SELECT sex, COUNT(*) AS cnt FROM authors GROUP BY sex
     ```
 
 13. Find the date of the earliest (put in the column `earliest`) and latest (put in the column `latest`) article written by each author:
@@ -140,7 +140,7 @@
 16. "Anonymize" the authors: replace each author’s last name with the properly capitalized reverse of it. E.g., `Alofsin` should become `Nisfola`, `Esposito` should become `Otisopse`, etc.
 
     ```postgresql
-    SELECT INITCAP(LOWER(REVERSE(last_name))) FROM authors
+    SELECT INITCAP(REVERSE(last_name)) FROM authors
     ```
     
 17. Delete all articles that don’t have an author:

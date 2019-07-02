@@ -85,7 +85,7 @@
 5. Retrieve articles with the information about the author attached to each row (there should be 12 rows in the result and around 10 columns, including the article’s title, text, rating, and date as well as the author’s name and sex):
 
     ```postgresql
-    SELECT * FROM authors INNER JOIN articles ON authors.id = articles.id;
+    SELECT * FROM articles INNER JOIN authors ON authors.id = articles.id;
     ```
 
 6. To get the twelve rows, you must have used one of the constructions `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, or `FULL JOIN`. How many rows would the other three have returned? First try to think of the answers and then verify them by running the queries (it’s important you understand the results). Put the numbers below:
@@ -150,7 +150,7 @@
     ```postgresql
     SELECT (authors.first_name || ' ' || authors.last_name)  AS author, sum(length(articles.title) + length(articles.text))
         FROM authors inner join articles ON authors.id = articles.author
-        group by authors.first_name, authors.last_name;
+        group by author
     ```
     
 15. Output all the authors in a random order. There should be only one column aliased `author` with the first and last name of the author concatenated (using a space, of course). The order of the rows should be different on each request:

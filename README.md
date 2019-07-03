@@ -81,40 +81,40 @@
 6. To get the twelve rows, you must have used one of the constructions `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, or `FULL JOIN`. How many rows would the other three have returned? First try to think of the answers and then verify them by running the queries (it’s important you understand the results). Put the numbers below:
 
     ```
-    INNER JOIN: ? 12
-    LEFT JOIN: ? 13
-    RIGHT JOIN: ? 14
-    FULL JOIN: ? 15
+    INNER JOIN: 11 rows
+    LEFT JOIN: 12 rows
+    RIGHT JOIN: 13 rows
+    FULL JOIN: 14 rows
     ```
 
 7. Imagine you’re using pagination to display articles showing five articles per page. Retrieve the content for the first page: create a query that would return the latest five articles, ordered from the latest to the earliest.
 
     ```postgresql
-    SELECT * FROM  articles  LIMIT 5 OFFSET 7;
+    SELECT * FROM  articles ORDER BY DATE DESC LIMIT 5;
     ```
 
 8. Retrieve the content for the second page: articles 6 through 10 (still assuming chronological order).
 
     ```postgresql
-   SELECT * FROM  articles LIMIT 5 OFFSET 5;
+   SELECT * FROM  articles ORDER BY DATE DESC LIMIT 5 OFFSET 5;
     ```
     
 9. Retrieve the content for the third page: articles 11 through 15 (never mind there are actually only 12 of them currently in the table).
 
     ```postgresql
-    SELECT * FROM  articles LIMIT 5 OFFSET 10;
+   SELECT * FROM  articles ORDER BY DATE DESC LIMIT 5 OFFSET 10;
     ```
     
 10. Count the number of five-article pages required to accommodate all articles:
 
     ```postgresql
-    SELECT ceil(count(*)/5::double precision)  FROM  articles;
+    SELECT ceil(count(*)/5::double precision) AS count  FROM  articles;
     ```
     
 11. Calculate an average rating of the articles, rounded to the nearest integer:
 
     ```postgresql
-    SELECT round(AVG(rating)) FROM  articles;
+    SELECT round(avg(rating)) FROM  articles;
     ```
 
 12. Count males and females among the authors. There should be two rows (for males and females) and two columns: `sex` (`F` or `M`) and `cnt` (count).
@@ -145,14 +145,14 @@
 
     ```postgresql
     SELECT "First name" ||' '|| "Last name" AS "author"
-    FROM authors ORDER BY RANDOM()
+    FROM authors ORDER BY random()
     LIMIT 9;
     ```
 
 16. "Anonymize" the authors: replace each author’s last name with the properly capitalized reverse of it. E.g., `Alofsin` should become `Nisfola`, `Esposito` should become `Otisopse`, etc.
 
     ```postgresql
-    UPDATE authors SET  "Last name" = reverse("Last name");
+    SELECT "First name", initcap(reverse("Last name")) FROM authors;
     ```
     
 17. Delete all articles that don’t have an author:
@@ -164,7 +164,7 @@
 18. **(optional)** Delete all authors that haven’t written any articles:
 
     ```postgresql
-    ... here goes your SQL ...
+    DELETE FROM authors WHERE id NOT IN (SELECT author_id FROM articles);
     ```
 
 Don’t forget to create a pull request.

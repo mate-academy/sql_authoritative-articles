@@ -22,8 +22,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="-60">
-                <caret line="157" column="50" lean-forward="true" selection-start-line="157" selection-start-column="50" selection-end-line="157" selection-end-column="50" />
+              <first_editor relative-caret-position="187">
+                <caret line="168" lean-forward="true" selection-start-line="168" selection-end-line="168" />
               </first_editor>
               <second_editor />
             </state>
@@ -57,7 +57,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../dvb-app" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -86,15 +86,18 @@
       <workItem from="1561878149603" duration="13520000" />
       <workItem from="1561915961104" duration="1310000" />
       <workItem from="1561973713425" duration="7753000" />
-      <workItem from="1562073211760" duration="6562000" />
+      <workItem from="1562073211760" duration="6716000" />
+      <workItem from="1562086031425" duration="3231000" />
+      <workItem from="1562141135291" duration="1619000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="29145000" />
+    <option name="totallyTimeSpent" value="34149000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1384" height="738" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -109,7 +112,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.2652705" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.23734729" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -124,8 +127,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="-60">
-            <caret line="157" column="50" lean-forward="true" selection-start-line="157" selection-start-column="50" selection-end-line="157" selection-end-column="50" />
+          <first_editor relative-caret-position="187">
+            <caret line="168" lean-forward="true" selection-start-line="168" selection-end-line="168" />
           </first_editor>
           <second_editor />
         </state>

@@ -127,7 +127,12 @@
 13. Find the date of the earliest (put in the column `earliest`) and latest (put in the column `latest`) article written by each author:
 
     ```postgresql
-    SELECT MIN(date) AS earliest, MAX(date) AS latest FROM articles;
+    SELECT (authors.first_name || authors.last_name) AS name,
+    MIN(date) AS earliest,
+    MAX(date) AS latest FROM authors
+    INNER JOIN articles
+    ON authors.id=articles.author_id
+    GROUP BY name;
     ```
     
 14. Calculate the total length of the text written by each author (count both `text` and `title`; you can keep the tags in `text` while counting):
@@ -147,7 +152,7 @@
 
     ```postgresql
     UPDATE authors
-    SET last_name = REVERSE(last_name);
+    SET last_name=INITCAP(REVERSE(last_name));
     ```
     
 17. Delete all articles that don’t have an author:

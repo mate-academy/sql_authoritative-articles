@@ -101,7 +101,7 @@
     select *
     from articles
     order by date
-    offset 5
+    offset 10
     limit 5;
     ```
     
@@ -155,8 +155,8 @@
 16. "Anonymize" the authors: replace each author’s last name with the properly capitalized reverse of it. E.g., `Alofsin` should become `Nisfola`, `Esposito` should become `Otisopse`, etc.
 
     ```postgresql
-    UPDATE authors
-    SET last_name = reverse(last_name);
+    update authors
+    set last_name = concat(upper(substr(reverse(last_name), 1, 1)), lower(substr(reverse(last_name),2)));
     ```
     
 17. Delete all articles that don’t have an author:

@@ -76,15 +76,15 @@
 5. Retrieve articles with the information about the author attached to each row (there should be 12 rows in the result and around 10 columns, including the article’s title, text, rating, and date as well as the author’s name and sex):
 
     ```postgresql
-    SELECT * FROM authors INNER JOIN articles ON authors.id = articles.author_id;
+    SELECT * FROM articles INNER JOIN authors ON authors.id = articles.author_id;
     ```
 
 6. To get the twelve rows, you must have used one of the constructions `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, or `FULL JOIN`. How many rows would the other three have returned? First try to think of the answers and then verify them by running the queries (it’s important you understand the results). Put the numbers below:
 
     ```
     INNER JOIN: ? 11
-    LEFT JOIN: ? 13
-    RIGHT JOIN: ? 12
+    LEFT JOIN: ? 12
+    RIGHT JOIN: ? 13
     FULL JOIN: ? 14
     ```
 
@@ -152,7 +152,7 @@
 
     ```postgresql
     UPDATE authors
-    SET last_name = INITCAP(last_name);
+    SET last_name=INITCAP(REVERSE(last_name));
     ```
     
 17. Delete all articles that don’t have an author:

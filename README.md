@@ -152,7 +152,7 @@
 
     ```postgresql
     UPDATE authors
-    SET last_name=INITCAP(REVERSE(last_name));
+    SET last_name = INITCAP(last_name);
     ```
     
 17. Delete all articles that don’t have an author:

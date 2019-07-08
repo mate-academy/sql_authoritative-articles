@@ -31,13 +31,13 @@
     ```postgresql
     INSERT INTO author (id, first_name, last_name, sex)
                 VALUES (1, 'Abi', 'Maxwell', 'F'),
-                        (2, 'Anthony', 'Alofsin', 'M'),
-                        (3, 'Emily', 'Temple', 'F'),
-                        (4, 'Gabrielle', 'Bellot', 'F'),
-                        (5, 'Meg', 'Donohue', 'F'),
-                        (6, 'Philip', 'Eil', 'M'),
-                        (7, 'Roxana', 'Robinson', 'F'),
-                        (8, 'Tobias', 'Carroll', 'M');
+                       (2, 'Anthony', 'Alofsin', 'M'),
+                       (3, 'Emily', 'Temple', 'F'),
+                       (4, 'Gabrielle', 'Bellot', 'F'),
+                       (5, 'Meg', 'Donohue', 'F'),
+                       (6, 'Philip', 'Eil', 'M'),
+                       (7, 'Roxana', 'Robinson', 'F'),
+                       (8, 'Tobias', 'Carroll', 'M');
     ```
 
 3. Using the client, design and create a table called `articles` that would store the information from the file [articles.xlsx](articles.xlsx). Use the already created `authors` table in order to refer to the authors. Don’t forget to create an ID field and all necessary constraints/keys/indices.

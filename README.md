@@ -48,7 +48,7 @@
     		constraint articles_pk
     			primary key,
     	title text,
-    	author int,
+    	author text,
     	date date,
     	rating double precision,
     	text text
@@ -97,16 +97,15 @@
 
 7. Imagine you’re using pagination to display articles showing five articles per page. Retrieve the content for the first page: create a query that would return the latest five articles, ordered from the latest to the earliest.
 
-    SELECT * FROM articles ORDER BY date DEST LIMIT 5;
+    SELECT * FROM articles ORDER BY date DESC LIMIT 5;
 
 8. Retrieve the content for the second page: articles 6 through 10 (still assuming chronological order).
 
-    
-    SELECT * FROM articles ORDER BY date DEST LIMIT 5 OFFSET 10;
+    SELECT * FROM articles ORDER BY date DESC LIMIT 4 OFFSET 6;
     
 9. Retrieve the content for the third page: articles 11 through 15 (never mind there are actually only 12 of them currently in the table).
 
-       SELECT text FROM articles ORDER BY date DESC LIMIT 5 OFFSET 10
+       SELECT text FROM articles ORDER BY date DESC LIMIT 4 OFFSET 11
     
 10. Count the number of five-article pages required to accommodate all articles:
 
@@ -127,7 +126,7 @@
     FROM authors
     INNER JOIN articles
     ON authors.id = articles.author
-    GROUP BY authors.first_name, authors.last_name;
+    GROUP BY author;
     
 14. Calculate the total length of the text written by each author (count both `text` and `title`; you can keep the tags in `text` while counting):
 

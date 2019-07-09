@@ -157,6 +157,10 @@
     ```postgresql
     update authors
     set last_name = concat(upper(substr(reverse(last_name), 1, 1)), lower(substr(reverse(last_name),2)));
+    
+    2nd version
+    update authors
+    set last_name = initcap(reverse(last_name));
     ```
     
 17. Delete all articles that don’t have an author:
